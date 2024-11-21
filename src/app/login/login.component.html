@@ -43,7 +43,7 @@
           Password is required.
         </div>
       </div>
-
+      
       <!-- Submit Button -->
       <button 
         type="submit" 
@@ -51,6 +51,9 @@
         class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out">
         Login
       </button>
+      <div *ngIf="errorMessage" class="text-red-500 text-sm mt-2 p-2 border border-red-500 rounded bg-red-100">
+        {{ errorMessage }}
+      </div>
     </form>
 
     <!-- Forgot Password Link -->

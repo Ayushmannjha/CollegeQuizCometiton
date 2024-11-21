@@ -7,13 +7,11 @@ import { Observable } from 'rxjs';
 })
 export class ServiceService {
 
-  private baseUrl = 'https://localhost:8082';  // Replace with your backend URL
+  private baseUrl = 'http://localhost:8082';  // Replace with your backend URL
 
   constructor(private http: HttpClient) {}
-  login(email: string, password: string): Observable<any> {
-    const loginUrl = `${this.baseUrl}/login`; // Backend login endpoint
-    const body = { email, password };
-
-    return this.http.post<any>(loginUrl, body);
+  login(credentials: { email: string; password: string }): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/login`, credentials);
   }
+  
 }

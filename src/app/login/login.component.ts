@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ServiceService } from '../service.service';
 
 @Component({
   selector: 'app-login',
@@ -8,16 +9,29 @@ import { Component } from '@angular/core';
 export class LoginComponent {
   email: string = '';  // Bind email input
   password: string = '';  // Bind password input
+  errorMessage: string | null = null;  // Store error message
 
-  constructor() {}
+  constructor(private service: ServiceService) {}
 
-  // Method to handle form submission
   onSubmit(): void {
-    if (this.email && this.password) {
-      console.log('Form Submitted!', { email: this.email, password: this.password });
-      // Logic to handle login request goes here, like sending data to an API.
-    } else {
-      console.log('Please fill out both email and password fields');
-    }
+    const credentials = { email: this.email, password: this.password };
+
+    this.service.login(credentials).subscribe(
+      (response) => {
+        console.log('Login successful:', response);
+        this.errorMessage = null; // Clear any previous error message on success
+        // Redirect or handle successful login here
+      },
+      (error) => {
+        console.error('Login failed:', error);
+
+        // If backend sends an error message, display it on the form
+        if (error.status === 401 && error.error && error.error.errorMessage) {
+          this.errorMessage = error.error.errorMessage;  // Set error message
+        } else {
+          this.errorMessage = 'An error occurred. Please try again later.';  // Default error message
+        }
+      }
+    );
   }
 }

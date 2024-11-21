@@ -3,7 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component'; // Adjust the path as per your project structure
 
 const routes: Routes = [
-  { path: '', component: LoginComponent } // Root path route
+  { path: '', component: LoginComponent },
+  { path: 'login', component: LoginComponent} // Root path route
 ];
 
 @NgModule({
