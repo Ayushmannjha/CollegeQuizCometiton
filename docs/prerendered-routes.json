@@ -1,6 +1,7 @@
 {
   "routes": [
     "/",
+    "/admin-login",
     "/login",
     "/registration",
     "/student-dashboard"
