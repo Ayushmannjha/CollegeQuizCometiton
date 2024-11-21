@@ -64,7 +64,7 @@
               </div>
               <ng-container *ngFor="let statusItem of filteredStatusList">
                 <ng-container *ngIf="statusItem?.questionId === question.id && statusItem?.submissionStatus === 0">
-                    <a [routerLink]="['/answer-panel', roll, question.id, i + 1]"
+                    <a (click)="getAnswerPanel(roll,question.id,i+1)"
                     class="inline-block bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out">
                    Solve it
                  </a>

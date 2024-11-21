@@ -1,0 +1,109 @@
+<div class="bg-blue-50 min-h-screen flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+      <h2 class="text-2xl font-semibold text-blue-600 mb-6 text-center">Register Student</h2>
+  
+      <form (ngSubmit)="registerStudent()" #registerForm="ngForm">
+        <!-- Name -->
+        <div class="mb-4">
+          <label for="name" class="block text-blue-600">Full Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            [(ngModel)]="student.name"
+            class="w-full px-4 py-2 mt-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+            #name="ngModel"
+          />
+          <div *ngIf="name.invalid && name.touched" class="text-red-500 text-sm">
+            Full Name is required.
+          </div>
+        </div>
+  
+        <!-- Email -->
+        <div class="mb-4">
+          <label for="email" class="block text-blue-600">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            [(ngModel)]="student.email"
+            class="w-full px-4 py-2 mt-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+            #email="ngModel"
+          />
+          <div *ngIf="email.invalid && email.touched" class="text-red-500 text-sm">
+            A valid Email is required.
+          </div>
+        </div>
+  
+        <!-- Phone -->
+        <div class="mb-4">
+          <label for="phone" class="block text-blue-600">Phone</label>
+          <input
+            type="text"
+            id="phone"
+            name="phone"
+            [(ngModel)]="student.phone"
+            class="w-full px-4 py-2 mt-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+            #phone="ngModel"
+          />
+          <div *ngIf="phone.invalid && phone.touched" class="text-red-500 text-sm">
+            Phone is required.
+          </div>
+        </div>
+  
+        <!-- Password -->
+        <div class="mb-4">
+          <label for="password" class="block text-blue-600">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            [(ngModel)]="student.password"
+            class="w-full px-4 py-2 mt-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+            #password="ngModel"
+          />
+          <div *ngIf="password.invalid && password.touched" class="text-red-500 text-sm">
+            Password is required.
+          </div>
+        </div>
+  
+        <!-- Roll Number -->
+        <div class="mb-6">
+          <label for="roll" class="block text-blue-600">Roll Number</label>
+          <input
+            type="text"
+            id="roll"
+            name="roll"
+            [(ngModel)]="student.roll"
+            class="w-full px-4 py-2 mt-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+            #roll="ngModel"
+          />
+          <div *ngIf="roll.invalid && roll.touched" class="text-red-500 text-sm">
+            Roll Number is required.
+          </div>
+        </div>
+  
+        <!-- Submit Button -->
+        <div class="text-center">
+          <button
+            type="submit"
+            class="w-full px-4 py-2 bg-blue-500 text-white font-bold rounded-lg shadow hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            [disabled]="registerForm.invalid || isSubmitting"
+          >
+            Register
+          </button>
+        </div>
+  
+        <!-- Error Message -->
+        <div *ngIf="errorMessage" class="mt-4 text-red-500 text-center">
+          {{ errorMessage }}
+        </div>
+      </form>
+    </div>
+  </div>
+  

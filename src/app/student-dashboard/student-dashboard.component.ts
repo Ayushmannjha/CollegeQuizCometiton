@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ServiceService } from '../service.service';
+import { response } from 'express';
+import { error } from 'console';
 
 @Component({
   selector: 'app-student-dashboard',
@@ -10,7 +13,7 @@ export class StudentDashboardComponent implements OnInit {
   // Type 'filteredStatusList' as 'any[]'
   filteredStatusList: any[] = [];
 
-  constructor(private router: Router) {}
+  constructor(private service:ServiceService,private router: Router) {}
 
   student: any = null;
   userData: any = null;
@@ -65,5 +68,17 @@ export class StudentDashboardComponent implements OnInit {
 
   isQuestionExpanded(questionId: number): boolean {
     return this.expandedQuestions.get(questionId) || false;
+  }
+  getAnswerPanel(roll:number,questionId: number,qno: number) {
+   this.service.getAnswerPanel(roll,questionId,qno).subscribe(
+    (response)=>{
+      console.log(response);
+      localStorage.setItem('answer-panel-data', JSON.stringify(response));
+      this.router.navigate(['/answer-panel', roll, questionId, qno]);
+    },
+    (error)=>{
+      console.error('Login failed:', error);
+    }
+   )
   }
 }
