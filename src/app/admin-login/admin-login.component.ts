@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../service.service';
 import { response } from 'express';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-login',
@@ -11,7 +12,7 @@ export class AdminLoginComponent {
   email:string= '';
   password:string='';
   errorMessage:string = '';
-constructor(private service:ServiceService){}
+constructor(private service:ServiceService,private router: Router){}
 
 
 
@@ -21,6 +22,7 @@ onSubmit(){
     (response)=>{
       console.log('Login successful:', response);
         localStorage.setItem('admin-data', JSON.stringify(response));
+        this.router.navigate(['/admin-dashboard']);
         
     },
     (error)=>{

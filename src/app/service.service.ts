@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ServiceService {
 
-  private baseUrl = 'http://localhost:8082';  // Replace with your backend URL
+  private baseUrl = 'http://13.235.115.172:8082';  // Replace with your backend URL
 
   constructor(private http: HttpClient) {}
   login(credentials: { email: string; password: string }): Observable<any> {
@@ -25,6 +25,13 @@ export class ServiceService {
   }
   submitAnswer(requestData: { roll: number; questionId: number; answer: string }): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/submit-answer`, requestData);
+  }
+  uploadQuestion(description: string, topic: string): Observable<any> {
+    const params = new HttpParams()
+    .set('description',description)
+    .set('topic', topic);
+    
+    return this.http.post(`${this.baseUrl}/uploadQuestion`, {}, { params });
   }
   registerStudent(studentData: {
     name: string;

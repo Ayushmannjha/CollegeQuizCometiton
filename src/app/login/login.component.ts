@@ -19,7 +19,7 @@ export class LoginComponent {
 
     this.service.login(credentials).subscribe(
       (response) => {
-        console.log('Login successful:', response);
+        //console.log('Login successful:', response);
         localStorage.setItem('userData', JSON.stringify(response));
         this.router.navigate(['/student-dashboard']);
         this.errorMessage = null; // Clear any previous error message on success

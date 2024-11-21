@@ -32,7 +32,7 @@ export class RegistrationComponent {
         this.isSubmitting = false;
         this.errorMessage = null; 
 
-        console.log('Registration successful:', response);
+        //console.log('Registration successful:', response);
         localStorage.setItem('userData', JSON.stringify(response));
         this.router.navigate(['/student-dashboard']);
         // You can redirect to another page or display a success message

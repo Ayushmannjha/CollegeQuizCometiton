@@ -24,16 +24,16 @@ export class StudentDashboardComponent implements OnInit {
     const storedData = localStorage.getItem('userData');
     if (storedData) {
       this.userData = JSON.parse(storedData);
-      console.log('Retrieved data in StudentDashboardComponent:', this.userData);
-      console.log(this.userData.student);
-      console.log(this.userData.questionStatusList);
+     // console.log('Retrieved data in StudentDashboardComponent:', this.userData);
+      //console.log(this.userData.student);
+      //console.log(this.userData.questionStatusList);
       this.student = this.userData.student;
       this.roll = this.userData.student.roll;
       this.questions = this.userData.questions;
 
       // Apply the filter to the status list
       this.filteredStatusList = this.filterStatusList(this.userData.questionStatusList);
-      console.log(this.filteredStatusList);
+      //console.log(this.filteredStatusList);
     } else {
       console.error('No user data found in localStorage');
     }
@@ -72,7 +72,7 @@ export class StudentDashboardComponent implements OnInit {
   getAnswerPanel(roll:number,questionId: number,qno: number) {
    this.service.getAnswerPanel(roll,questionId,qno).subscribe(
     (response)=>{
-      console.log(response);
+      //console.log(response);
       localStorage.setItem('answer-panel-data', JSON.stringify(response));
       this.router.navigate(['/answer-panel', roll, questionId, qno]);
     },

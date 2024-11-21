@@ -9,6 +9,7 @@ import { StudentDashboardComponent } from './student-dashboard/student-dashboard
 import { AnswerPanelComponent } from './answer-panel/answer-panel.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
     StudentDashboardComponent,
     AnswerPanelComponent,
     RegistrationComponent,
-    AdminLoginComponent
+    AdminLoginComponent,
+    AdminDashboardComponent
   ],
   imports: [
     BrowserModule,

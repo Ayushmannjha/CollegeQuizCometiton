@@ -1,0 +1,80 @@
+<div class="min-h-screen bg-[#f0f8ff]">
+    <!-- Navbar -->
+    <nav class="bg-[#3b82f6] border-b-4 border-[#2563eb]">
+      <div class="container mx-auto px-4 py-2">
+        <h1 class="text-white text-center text-2xl font-bold">Admin Dashboard</h1>
+      </div>
+    </nav>
+  
+    <!-- Main Content -->
+    <div class="container mx-auto mt-10">
+      <h1 class="text-center text-3xl font-semibold text-[#3b82f6] mb-6">{{ admin?.name }}</h1>
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Upload Question Card -->
+        <div class="bg-white shadow-lg rounded-lg p-6">
+          <h4 class="text-xl font-bold text-center text-[#3b82f6] mb-4">Upload Question</h4>
+          <form (ngSubmit)="uploadQuestion()" #uploadForm="ngForm">
+            <div class="mb-4">
+              <label for="description" class="block text-gray-700 font-medium mb-2">Question Description</label>
+              <textarea
+                id="description"
+                name="description"
+                [(ngModel)]="question.description"
+                rows="4"
+                class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-[#3b82f6]"
+                required
+              ></textarea>
+            </div>
+            <div class="mb-4">
+              <label for="topic" class="block text-gray-700 font-medium mb-2">Question Topic</label>
+              <input
+                type="text"
+                id="topic"
+                name="topic"
+                [(ngModel)]="question.topic"
+                class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-[#3b82f6]"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              class="w-full bg-[#3b82f6] text-white font-medium py-2 rounded-lg hover:bg-[#2563eb]"
+            >
+              Upload
+            </button>
+          </form>
+          <div
+            *ngIf="successMessage"
+            class="bg-green-100 text-green-700 mt-4 p-3 rounded-lg text-center"
+          >
+            {{ successMessage }}
+          </div>
+        </div>
+  
+        <!-- Search Student Status Card -->
+        <div class="bg-white shadow-lg rounded-lg p-6">
+          <h4 class="text-xl font-bold text-center text-[#3b82f6] mb-4">Search Student Status</h4>
+          <form (ngSubmit)="searchStudent()" #searchStudentForm="ngForm">
+            <div class="mb-4">
+              <label for="rollNo" class="block text-gray-700 font-medium mb-2">Student Roll Number</label>
+              <input
+                type="text"
+                id="rollNo"
+                name="rollNo"
+                [(ngModel)]="rollNo"
+                class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-[#3b82f6]"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              class="w-full bg-[#3b82f6] text-white font-medium py-2 rounded-lg hover:bg-[#2563eb]"
+            >
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
