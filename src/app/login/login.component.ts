@@ -19,6 +19,8 @@ export class LoginComponent {
     this.service.login(credentials).subscribe(
       (response) => {
         console.log('Login successful:', response);
+        localStorage.setItem('userData', JSON.stringify(response));
+        window.location.href='/student-dashboard'
         this.errorMessage = null; // Clear any previous error message on success
         // Redirect or handle successful login here
       },
