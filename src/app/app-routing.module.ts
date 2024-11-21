@@ -6,7 +6,7 @@ import { StudentDashboardComponent } from './student-dashboard/student-dashboard
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent}, // Root path route
-  { path: 'student-dashboard', component: StudentDashboardComponent}
+  { path: 'CollegeQuizCometiton/student-dashboard', component: StudentDashboardComponent}
 ];
 
 @NgModule({
