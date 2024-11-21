@@ -1,1 +1,113 @@
-<p>student-dashboard works!</p>
+<div class="bg-blue-50 min-h-screen">
+    <!-- Navbar -->
+    <nav class="bg-blue-500 text-white p-4">
+      <div class="container mx-auto flex justify-between items-center">
+        <a class="text-2xl font-bold" href="#">Student Dashboard</a>
+        <div class="flex items-center space-x-4">
+          <div class="text-white">
+            Name: {{ student.name }} | Roll No: {{ student.roll }}
+          </div>
+          <button 
+            (click)="logout()" 
+            class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300"
+          >
+            Logout
+          </button>
+        </div>
+      </div>
+    </nav>
+  
+    <!-- Card Section -->
+    <div class="container mx-auto p-6">
+      <div class="bg-white p-6 rounded-lg shadow-lg max-w-4xl mx-auto">
+        <h5 class="text-center text-xl font-semibold text-blue-700">Student Progress</h5>
+        <div class="grid grid-cols-2 gap-4 text-center">
+          <div>
+            <p>Total Questions</p>
+            <h6>{{ userData.questions.length }}</h6>
+          </div>
+          <div>
+            <p>Submitted Answers</p>
+            <h6>0</h6>
+          </div>
+          <div>
+            <p>Approved by Teacher</p>
+            <h6>0</h6>
+          </div>
+          <div>
+            <p>Correct / Incorrect</p>
+            <h6>0</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Table Section -->
+    <div class="container mx-auto mt-10">
+      <table class="table-auto w-full bg-white shadow-lg rounded-lg">
+        <thead class="bg-blue-500 text-white">
+          <tr>
+            <th class="p-3">Question No</th>
+            <th class="p-3">Question Description</th>
+            <th class="p-3">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="questions.length === 0">
+            <td colspan="3" class="text-center p-4">No questions uploaded yet</td>
+          </tr>
+          <tr *ngFor="let question of questions; let i = index">
+            <td class="p-3">{{ i + 1 }}</td>
+            <td class="p-3">
+              <div class="truncate w-64">
+                {{ question.description }}
+              </div>
+              <ng-container *ngFor="let statusItem of filteredStatusList">
+                <ng-container *ngIf="statusItem?.questionId === question.id && statusItem?.submissionStatus === 0">
+                    <a [routerLink]="['/answer-panel', roll, question.id, i + 1]"
+                    class="inline-block bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out">
+                   Solve it
+                 </a>
+                 
+                </ng-container>
+              </ng-container>
+            </td>
+            <td>
+              <ng-container *ngFor="let statusItem of filteredStatusList">
+                <ng-container *ngIf="statusItem?.questionId === question.id">
+                  <!-- Submission Status Indicator -->
+                  <span 
+                    [ngClass]="{
+                      'bg-green-500': statusItem.submissionStatus === 1,
+                      'bg-gray-300': statusItem.submissionStatus === 0
+                    }" 
+                    class="status-indicator inline-block w-3 h-3 rounded-full mr-2">
+                  </span>
+  
+                  <!-- Approved Status Indicator -->
+                  <span 
+                    [ngClass]="{
+                      'bg-green-500': statusItem.approvedStatus === 1,
+                      'bg-gray-300': statusItem.approvedStatus === 0
+                    }" 
+                    class="status-indicator inline-block w-3 h-3 rounded-full mr-2">
+                  </span>
+  
+                  <!-- Correctness Status Indicator -->
+                  <span 
+                    [ngClass]="{
+                      'bg-green-500': statusItem.isCorrect === 1,
+                      'bg-red-500': statusItem.isCorrect === 2,
+                      'bg-gray-300': statusItem.isCorrect === 0 || statusItem.isCorrect == null
+                    }" 
+                    class="status-indicator inline-block w-3 h-3 rounded-full">
+                  </span>
+                </ng-container>
+              </ng-container>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
