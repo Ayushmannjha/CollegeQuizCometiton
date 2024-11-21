@@ -1,81 +1,82 @@
 <body class="bg-gradient-to-b from-blue-50 to-blue-100 min-h-screen flex items-center justify-center relative overflow-hidden">
-    <!-- Floating Images -->
-    <div class="absolute top-10 left-20 w-64 h-64 bg-blue-300 rounded-full opacity-20 animate-float"></div>
-    <div class="absolute bottom-10 right-20 w-64 h-64 bg-blue-400 rounded-full opacity-20 animate-float-alt"></div>
-  
-    <!-- Login Form Container -->
-    <div class="w-full max-w-md bg-white rounded-lg shadow-xl p-8 relative z-10">
-      <h2 class="text-3xl font-bold text-center text-blue-700">Login</h2>
-      <p class="text-center text-blue-500 mb-6">Sign in to take your coding challenges</p>
-  
-      <!-- Login Form -->
-      <form>
-        <!-- Email Input -->
-        <div class="mb-4">
-          <label for="email" class="block text-sm font-medium text-blue-700">Email</label>
-          <input 
-            type="email" 
-            id="email" 
-            name="email" 
-            placeholder="Enter your email" 
-            class="mt-1 w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div>
-  
-        <!-- Password Input -->
-        <div class="mb-4">
-          <label for="password" class="block text-sm font-medium text-blue-700">Password</label>
-          <input 
-            type="password" 
-            id="password" 
-            name="password" 
-            placeholder="Enter your password" 
-            class="mt-1 w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div>
-  
-        <!-- Submit Button -->
-        <button 
-          type="submit" 
-          class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out">
-          Login
-        </button>
-      </form>
-  
-      <!-- Registration Link -->
-      <p class="text-center text-sm text-gray-600 mt-4">
-        Don't have an account? 
-        <a href="register.html" class="text-blue-500 hover:underline">Register</a>
-      </p>
-    </div>
-  
-    <!-- Tailwind Animation Styles -->
-    <style>
-      @keyframes float {
-        0%, 100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(-20px);
-        }
+  <!-- Floating Images -->
+  <div class="absolute top-10 left-20 w-64 h-64 bg-blue-300 rounded-full opacity-20 animate-float" [ngStyle]="{'pointer-events': 'none'}"></div>
+  <div class="absolute bottom-10 right-20 w-64 h-64 bg-blue-400 rounded-full opacity-20 animate-float-alt" [ngStyle]="{'pointer-events': 'none'}"></div>
+
+  <!-- Login Form Container -->
+  <div class="w-full max-w-md bg-white rounded-lg shadow-xl p-8 relative z-10">
+    <h2 class="text-3xl font-bold text-center text-blue-700">Login</h2>
+    <p class="text-center text-blue-500 mb-6">Sign in to take your coding challenges</p>
+
+    <!-- Login Form -->
+    <form (ngSubmit)="onSubmit()">
+      <!-- Email Input -->
+      <div class="mb-4">
+        <label for="email" class="block text-sm font-medium text-blue-700">Email</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          placeholder="Enter your email" 
+          [(ngModel)]="email"
+          class="mt-1 w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
+        />
+      </div>
+
+      <!-- Password Input -->
+      <div class="mb-4">
+        <label for="password" class="block text-sm font-medium text-blue-700">Password</label>
+        <input 
+          type="password" 
+          id="password" 
+          name="password" 
+          placeholder="Enter your password" 
+          [(ngModel)]="password"
+          class="mt-1 w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
+        />
+      </div>
+
+      <!-- Submit Button -->
+      <button 
+        type="submit" 
+        class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out">
+        Login
+      </button>
+    </form>
+
+    <!-- Registration Link -->
+    <p class="text-center text-sm text-gray-600 mt-4">
+      Don't have an account? 
+      <a href="register.html" class="text-blue-500 hover:underline">Register</a>
+    </p>
+  </div>
+
+  <!-- Tailwind Animation Styles -->
+  <style>
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
       }
-  
-      @keyframes float-alt {
-        0%, 100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(20px);
-        }
+      50% {
+        transform: translateY(-20px);
       }
-  
-      .animate-float {
-        animation: float 6s infinite ease-in-out;
+    }
+
+    @keyframes float-alt {
+      0%, 100% {
+        transform: translateY(0);
       }
-  
-      .animate-float-alt {
-        animation: float-alt 6s infinite ease-in-out;
+      50% {
+        transform: translateY(20px);
       }
-    </style>
-  </body>
-  
+    }
+
+    .animate-float {
+      animation: float 6s infinite ease-in-out;
+    }
+
+    .animate-float-alt {
+      animation: float-alt 6s infinite ease-in-out;
+    }
+  </style>
+</body>
