@@ -81,4 +81,31 @@ export class StudentDashboardComponent implements OnInit {
     }
    )
   }
+  getCountOfEveryStatus(questionStatusList:any[]){
+    let submittedAnswers = 0;
+    let approvedAnswers = 0;
+    let correctAnswers = 0;
+    let incorrectAnswers = 0;
+
+    questionStatusList.forEach(status => {
+      if (status.submissionStatus===1) {
+        submittedAnswers++;
+      }
+      if (status.approvedStatus===1) {
+        approvedAnswers++;
+      }
+      if (status.isCorrect===1) {
+        correctAnswers++;
+      } else if (status.isCorrect=== 2) {
+        incorrectAnswers++;
+      }
+    });
+
+    return {
+      submittedAnswers,
+      approvedAnswers,
+      correctAnswers,
+      incorrectAnswers
+    };
+  }
 }

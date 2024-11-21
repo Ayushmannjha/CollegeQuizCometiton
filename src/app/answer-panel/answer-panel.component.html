@@ -39,6 +39,14 @@
           >
             Submit Answer
           </button>
+  
+          <!-- Success/Error Message -->
+          <div *ngIf="successMessage" class="mt-4 text-green-500 text-center">
+            {{ successMessage }}
+          </div>
+          <div *ngIf="errorMessage" class="mt-4 text-red-500 text-center">
+            {{ errorMessage }}
+          </div>
         </form>
       </div>
     </div>

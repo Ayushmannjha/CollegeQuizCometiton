@@ -18,6 +18,8 @@ export class AnswerPanelComponent implements OnInit {
   answerPanelData:any = null;
   qno:any=null;
   userData: any = null;
+  successMessage: string = '';
+  errorMessage: string = '';
   constructor(private service: ServiceService,private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
@@ -42,7 +44,7 @@ disableCopyPaste(event: ClipboardEvent): void {
       alert('Answer cannot be empty!');
       return;
     }
-
+    this.isSubmitting = true;
     const formData = {
       roll: this.student.roll,
       questionId: this.question.id,
@@ -50,15 +52,19 @@ disableCopyPaste(event: ClipboardEvent): void {
     };
 
     this.service.submitAnswer(formData).subscribe(
+      
       (response) => {
         // Get the userdata from localStorage (parse it to object)
         const storedData = localStorage.getItem('userData');  // Ensure the key is 'userData' here
         if (storedData) {
           this.userData = JSON.parse(storedData);
-    
+          
           if (response && response.questionStatusList) {
             this.userData.questionStatusList = response.questionStatusList;
-            console.log(this.userData);
+            this.successMessage = 'Answer submitted successfully!';
+        this.errorMessage = ''; 
+         // Clear any previous success message
+       
     
             // Save the updated userdata back to localStorage using the same key 'userData'
             localStorage.setItem('userData', JSON.stringify(this.userData));  // Use 'userData' here as well
@@ -67,6 +73,8 @@ disableCopyPaste(event: ClipboardEvent): void {
       },
       (error) => {
         console.log(error);
+        this.successMessage = '';
+        this.errorMessage = 'An error occurred while submitting the answer. Please try again.';
       }
     );
     

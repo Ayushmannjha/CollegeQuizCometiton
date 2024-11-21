@@ -42,4 +42,7 @@ export class ServiceService {
 
     return this.http.post<any>(`${this.baseUrl}/register-student`, {}, { params });
   }
+  adminLogin(credentials: { email: string; password: string }): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/admin-login`, credentials);
+  }
 }

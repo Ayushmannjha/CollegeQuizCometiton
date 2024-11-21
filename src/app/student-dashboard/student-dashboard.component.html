@@ -28,15 +28,15 @@
           </div>
           <div>
             <p>Submitted Answers</p>
-            <h6>0</h6>
+            <h6>{{getCountOfEveryStatus(userData.questionStatusList).submittedAnswers}}</h6>
           </div>
           <div>
             <p>Approved by Teacher</p>
-            <h6>0</h6>
+            <h6>{{getCountOfEveryStatus(userData.questionStatusList).approvedAnswers}}</h6>
           </div>
           <div>
             <p>Correct / Incorrect</p>
-            <h6>0</h6>
+            <h6>{{getCountOfEveryStatus(userData.questionStatusList).correctAnswers}} / {{getCountOfEveryStatus(userData.questionStatusList).incorrectAnswers}}</h6>
           </div>
         </div>
       </div>
