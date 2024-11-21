@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ServiceService } from '../service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ export class LoginComponent {
   password: string = '';  // Bind password input
   errorMessage: string | null = null;  // Store error message
 
-  constructor(private service: ServiceService) {}
+  constructor(private service: ServiceService,private router: Router) {}
 
   onSubmit(): void {
     const credentials = { email: this.email, password: this.password };
@@ -20,7 +21,7 @@ export class LoginComponent {
       (response) => {
         console.log('Login successful:', response);
         localStorage.setItem('userData', JSON.stringify(response));
-        window.location.href='/student-dashboard'
+        this.router.navigate(['/student-dashboard']);
         this.errorMessage = null; // Clear any previous error message on success
         // Redirect or handle successful login here
       },
