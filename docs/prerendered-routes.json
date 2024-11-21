@@ -2,6 +2,7 @@
   "routes": [
     "/",
     "/login",
+    "/registration",
     "/student-dashboard"
   ]
 }
