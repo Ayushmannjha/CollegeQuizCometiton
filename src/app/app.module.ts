@@ -10,6 +10,7 @@ import { AnswerPanelComponent } from './answer-panel/answer-panel.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { ProfileCheckComponent } from './profile-check/profile-check.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
     AnswerPanelComponent,
     RegistrationComponent,
     AdminLoginComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    ProfileCheckComponent
   ],
   imports: [
     BrowserModule,

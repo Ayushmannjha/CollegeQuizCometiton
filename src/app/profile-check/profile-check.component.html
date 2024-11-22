@@ -1,0 +1,66 @@
+<div class="bg-saffronish-white min-h-screen">
+    <!-- Navbar -->
+    <nav class="bg-[#e19a2b] text-white py-3">
+      <div class="container mx-auto flex justify-between items-center">
+        <h1 class="font-bold text-lg">Student Dashboard</h1>
+        <div>Name: {{ studentData?.name }} | Roll No: {{ studentData?.roll }}</div>
+      </div>
+    </nav>
+  
+    <!-- Table Section -->
+    <div class="container mx-auto mt-5">
+      <div *ngIf="!questions || questions.length === 0" class="text-center py-10">
+        <p class="text-lg text-gray-600">No questions uploaded yet</p>
+      </div>
+      <div *ngIf="questions && questions.length > 0">
+        <table class="w-full bg-white rounded-lg shadow-md overflow-hidden">
+          <thead>
+            <tr class="bg-[#e19a2b] text-white text-center">
+              <th class="py-2 px-4">Question No</th>
+              <th class="py-2 px-4">Question Description</th>
+              <th class="py-2 px-4">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let question of questions; let i = index" class="text-center hover:bg-[#fcecc7]">
+              <td class="py-2 px-4">{{ i + 1 }}</td>
+              <td class="py-2 px-4">
+                <div class="truncate max-w-xs mx-auto">{{ question.description }}</div>
+                <div *ngIf="question.description.length > 100">
+                  <a
+                    href="#"
+                    class="text-blue-600 underline"
+                    (click)="toggleQuestionDetails(question.id, $event)"
+                  >
+                    Read More
+                  </a>
+                </div>
+              </td>
+              <td class="py-2 px-4">
+                <div *ngIf="isQuestionApproved(question.id); else unapproved">
+                  <span class="inline-block w-5 h-5 bg-green-500 rounded-full"></span>
+                  <span>Checked</span>
+                </div>
+                <ng-template #unapproved>
+                  <span class="inline-block w-5 h-5 bg-orange-500 rounded-full"></span>
+                  <span>Unchecked</span>
+                  <a
+                    [routerLink]="['/check-panel']"
+                    [queryParams]="{
+                      roll: studentData.roll,
+                      questionId: question.id,
+                      qno: i + 1
+                    }"
+                    class="ml-2 text-blue-600 underline"
+                  >
+                    Check it
+                  </a>
+                </ng-template>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
