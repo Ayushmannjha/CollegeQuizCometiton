@@ -11,6 +11,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { ProfileCheckComponent } from './profile-check/profile-check.component';
+import { CheckAnswerComponent } from './check-answer/check-answer.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ProfileCheckComponent } from './profile-check/profile-check.component';
     RegistrationComponent,
     AdminLoginComponent,
     AdminDashboardComponent,
-    ProfileCheckComponent
+    ProfileCheckComponent,
+    CheckAnswerComponent
   ],
   imports: [
     BrowserModule,

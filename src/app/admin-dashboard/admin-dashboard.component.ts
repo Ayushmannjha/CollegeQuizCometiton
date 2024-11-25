@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, numberAttribute } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ServiceService } from '../service.service';
 import { response } from 'express';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -14,7 +15,7 @@ export class AdminDashboardComponent {
   rollNo: string = '';
   successMessage: string | null = null;
 
-  constructor(private service: ServiceService) {}
+  constructor(private router:Router,private service: ServiceService) {}
 
   uploadQuestion() {
     if (!this.question.description || !this.question.topic) {
@@ -38,7 +39,13 @@ export class AdminDashboardComponent {
       alert('Please enter a roll number.');
       return;
     }
-
+    this.service.searchStudent(this.rollNo).subscribe(
+      (response)=>{
+        console.log(response);
+        localStorage.setItem('studentData',JSON.stringify(response));
+        this.router.navigate(['/profile-check']);
+      }
+    )
    
   }
 }

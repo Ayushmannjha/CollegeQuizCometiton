@@ -7,8 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ServiceService {
 
-  private baseUrl = "http://13.235.115.172";
-  // Replace with your backend URL
+  private baseUrl = 'https://college.astropoints.in';  // Replace with your backend URL
 
   constructor(private http: HttpClient) {}
   login(credentials: { email: string; password: string }): Observable<any> {
@@ -53,8 +52,23 @@ export class ServiceService {
   adminLogin(credentials: { email: string; password: string }): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/admin-login`, credentials);
   }
-  searchStudent(roll: string): Observable<any> {
+   searchStudent(roll: string): Observable<any> {
     const params = new HttpParams().set('roll', roll);
     return this.http.get(`${this.baseUrl}/searchStudent`, { params });
+  }
+
+  updateQuestionStatus(request: { questionId: number, roll: number, status: string }): Observable<any> {
+    return this.http.post(`${this.baseUrl}/updateQuestionStatus`, request);
+  }
+
+  checkPanel(roll: number, questionId: number, qno: number): Observable<any> {
+    // Set up the query parameters
+    const params = new HttpParams()
+      .set('roll', roll.toString())
+      .set('questionId', questionId.toString())
+      .set('qno', qno);
+
+    // Use the correct endpoint URL for the GET request
+    return this.http.get(`${this.baseUrl}/check-panel`, { params });
   }
 }

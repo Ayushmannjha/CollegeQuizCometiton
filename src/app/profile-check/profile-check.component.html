@@ -1,66 +1,95 @@
-<div class="bg-saffronish-white min-h-screen">
+<div class="bg-blue-50 min-h-screen">
     <!-- Navbar -->
-    <nav class="bg-[#e19a2b] text-white py-3">
+    <nav class="bg-blue-500 text-white p-4">
       <div class="container mx-auto flex justify-between items-center">
-        <h1 class="font-bold text-lg">Student Dashboard</h1>
-        <div>Name: {{ studentData?.name }} | Roll No: {{ studentData?.roll }}</div>
+        <a class="text-2xl font-bold" href="#">Student Dashboard</a>
+        <div class="flex items-center space-x-4">
+          <div class="text-white">
+            Name: {{ student.name }} | Roll No: {{ student.roll }}
+          </div>
+          <button 
+            (click)="logout()" 
+            class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300"
+          >
+            Logout
+          </button>
+        </div>
       </div>
     </nav>
   
+    <!-- Card Section -->
+    <div class="container mx-auto p-6">
+      <div class="bg-white p-6 rounded-lg shadow-lg max-w-4xl mx-auto">
+        <h5 class="text-center text-xl font-semibold text-blue-700">Student Progress</h5>
+        <div class="grid grid-cols-2 gap-4 text-center">
+          <div>
+            <p>Total Questions</p>
+            <h6>{{ userData.question.length }}</h6>
+          </div>
+          <div>
+            <p>Submitted Answers</p>
+            <h6>{{getCountOfEveryStatus(userData.questionStatusList).submittedAnswers}}</h6>
+          </div>
+          <div>
+            <p>Approved by Teacher</p>
+            <h6>{{getCountOfEveryStatus(userData.questionStatusList).approvedAnswers}}</h6>
+          </div>
+          <div>
+            <p>Correct / Incorrect</p>
+            <h6>{{getCountOfEveryStatus(userData.questionStatusList).correctAnswers}} / {{getCountOfEveryStatus(userData.questionStatusList).incorrectAnswers}}</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  
     <!-- Table Section -->
-    <div class="container mx-auto mt-5">
-      <div *ngIf="!questions || questions.length === 0" class="text-center py-10">
-        <p class="text-lg text-gray-600">No questions uploaded yet</p>
-      </div>
-      <div *ngIf="questions && questions.length > 0">
-        <table class="w-full bg-white rounded-lg shadow-md overflow-hidden">
-          <thead>
-            <tr class="bg-[#e19a2b] text-white text-center">
-              <th class="py-2 px-4">Question No</th>
-              <th class="py-2 px-4">Question Description</th>
-              <th class="py-2 px-4">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let question of questions; let i = index" class="text-center hover:bg-[#fcecc7]">
-              <td class="py-2 px-4">{{ i + 1 }}</td>
-              <td class="py-2 px-4">
-                <div class="truncate max-w-xs mx-auto">{{ question.description }}</div>
-                <div *ngIf="question.description.length > 100">
-                  <a
-                    href="#"
-                    class="text-blue-600 underline"
-                    (click)="toggleQuestionDetails(question.id, $event)"
-                  >
-                    Read More
-                  </a>
-                </div>
-              </td>
-              <td class="py-2 px-4">
-                <div *ngIf="isQuestionApproved(question.id); else unapproved">
-                  <span class="inline-block w-5 h-5 bg-green-500 rounded-full"></span>
-                  <span>Checked</span>
-                </div>
-                <ng-template #unapproved>
-                  <span class="inline-block w-5 h-5 bg-orange-500 rounded-full"></span>
-                  <span>Unchecked</span>
-                  <a
-                    [routerLink]="['/check-panel']"
-                    [queryParams]="{
-                      roll: studentData.roll,
-                      questionId: question.id,
-                      qno: i + 1
-                    }"
-                    class="ml-2 text-blue-600 underline"
-                  >
-                    Check it
-                  </a>
-                </ng-template>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="container mx-auto mt-10">
+      <table class="table-auto w-full bg-white shadow-lg rounded-lg">
+        <thead class="bg-blue-500 text-white">
+          <tr>
+            <th class="p-3">Question No</th>
+            <th class="p-3">Question Description</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="questions.length === 0">
+            <td colspan="3" class="text-center p-4">No questions uploaded yet</td>
+          </tr>
+          <tr *ngFor="let question of questions; let i = index">
+            <td class="p-3">{{ i + 1 }}</td>
+            <td class="p-3">
+              <div class="truncate w-64">
+                {{ question.description }}
+              </div>
+              <ng-container *ngFor="let statusItem of filteredStatusList">
+                <ng-container *ngIf="statusItem?.questionId === question.id">
+                  <!-- Logic for submission status -->
+                  <span *ngIf="statusItem?.submissionStatus === 0" 
+                        class="text-yellow-500 font-semibold">
+                    Not Solved
+                  </span>
+            
+                  <!-- Logic for approved and submission status -->
+                  <span *ngIf="statusItem?.submissionStatus === 1 && statusItem?.approvedStatus === 0">
+                    <a (click)="getAnswerPanel(roll, question.id, i + 1)"
+                       class="inline-block text-blue-500 underline hover:text-blue-600 transition duration-300">
+                      Check
+                    </a>
+                  </span>
+            
+                  <!-- Logic for approved status -->
+                  <span *ngIf="statusItem?.submissionStatus === 1 && statusItem?.approvedStatus === 1" 
+                        class="text-green-500 font-semibold">
+                    Checked
+                  </span>
+                </ng-container>
+              </ng-container>
+            </td>
+            
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
   

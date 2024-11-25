@@ -6,6 +6,8 @@ import { AnswerPanelComponent } from './answer-panel/answer-panel.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { ProfileCheckComponent } from './profile-check/profile-check.component';
+import { CheckAnswerComponent } from './check-answer/check-answer.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -14,7 +16,9 @@ const routes: Routes = [
   {path: 'answer-panel/:roll/:questionId/:index', component:AnswerPanelComponent},
   {path:'registration', component:RegistrationComponent},
   {path:'admin-login',component:AdminLoginComponent},
-  {path:'admin-dashboard',component:AdminDashboardComponent}
+  {path:'admin-dashboard',component:AdminDashboardComponent},
+  {path:'profile-check',component:ProfileCheckComponent},
+  {path:'check-answer',component:CheckAnswerComponent}
 ];
 
 @NgModule({
