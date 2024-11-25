@@ -3,7 +3,9 @@
     "/",
     "/admin-dashboard",
     "/admin-login",
+    "/check-answer",
     "/login",
+    "/profile-check",
     "/registration",
     "/student-dashboard"
   ]
