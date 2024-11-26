@@ -1,0 +1,9 @@
+{
+
+    "/**":{
+        "target": "https://collage.astropoints.in",
+        "secure":true,
+        "changeOrigin":true
+    }
+
+}

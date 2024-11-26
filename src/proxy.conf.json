@@ -1,6 +1,0 @@
-{
-    "/api":{
-        "target": "https://collage.astropoints.in",
-        "secure":false
-    }
-}
