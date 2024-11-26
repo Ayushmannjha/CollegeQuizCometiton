@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
 
 export class ServiceService {
 
-  //private baseUrl = 'https://collage.astropoints.in';  // Replace with your backend URL
-   private baseUrl = 'http://localhost:8082';
+  private baseUrl = 'https://collage.astropoints.in';  // Replace with your backend URL
+  // private baseUrl = 'http://localhost:8082';
   constructor(private http: HttpClient) {}
 
   login(credentials: { email: string; password: string }): Observable<any> {
