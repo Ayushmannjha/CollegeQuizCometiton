@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -8,10 +8,15 @@ import { Observable } from 'rxjs';
 export class ServiceService {
 
   private baseUrl = 'https://collage.astropoints.in';  // Replace with your backend URL
-
+// private baseUrl = 'http://localhost:8082';
   constructor(private http: HttpClient) {}
   login(credentials: { email: string; password: string }): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/login`, credentials);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Orign': 'true' // Ensure you're sending JSON content
+      // Example for adding a token, if required
+    });
+    return this.http.post<any>(`${this.baseUrl}/login`, credentials,{headers});
   }
   getAnswerPanel(roll: number, questionId: number, qno: number): Observable<any> {
     // Set up the query parameters
@@ -50,7 +55,12 @@ export class ServiceService {
     return this.http.post<any>(`${this.baseUrl}/register-student`, {}, { params });
   }
   adminLogin(credentials: { email: string; password: string }): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/admin-login`, credentials);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Orign': 'true' // Ensure you're sending JSON content
+      // Example for adding a token, if required
+    });
+    return this.http.post<any>(`${this.baseUrl}/admin-login`, credentials,{headers});
   }
    searchStudent(roll: string): Observable<any> {
     const params = new HttpParams().set('roll', roll);
