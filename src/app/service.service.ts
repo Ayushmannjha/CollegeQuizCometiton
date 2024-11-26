@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ServiceService {
 
-  private baseUrl = 'https://college.astropoints.in';  // Replace with your backend URL
+  private baseUrl = 'https://collage.astropoints.in';  // Replace with your backend URL
 
   constructor(private http: HttpClient) {}
   login(credentials: { email: string; password: string }): Observable<any> {
