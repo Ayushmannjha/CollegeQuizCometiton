@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
+import axios from 'axios';
 @Injectable({
   providedIn: 'root'
 })
@@ -75,14 +75,20 @@ export class ServiceService {
     return this.http.post<any>(`${this.baseUrl}/register-student`, {}, { params, headers });
   }
 
-  adminLogin(credentials: { email: string; password: string }): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': 'https://ayushmannjha.github.io',
-      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
-    });
-    return this.http.post<any>(`${this.baseUrl}/admin-login`, credentials, { headers });
+  async adminLogin(credentials: { email: string; password: string }): Promise<any> {
+    try {
+      const headers = {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'https://ayushmannjha.github.io',
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+      };
+      const response = await axios.post(`${this.baseUrl}/admin-login`, credentials, { headers });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
   }
+
 
   searchStudent(roll: string): Observable<any> {
     const params = new HttpParams().set('roll', roll);
