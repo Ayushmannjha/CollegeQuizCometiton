@@ -23,8 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "browserTarget": "your-application-name:build",
-            "proxyConfig":"src/proxy.conf.json",
+            
             "baseHref": "/CollegeQuizCometiton/",
             "outputPath": "dist/frontend",
             "index": "src/index.html",
@@ -75,6 +74,10 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "your-application-name:build",
+            "proxyConfig":"src/proxy.conf.json"
+          },
           "configurations": {
             "production": {
               "buildTarget": "Frontend:build:production"
